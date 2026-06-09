@@ -77,7 +77,7 @@ volatile bool cancelar_coleta = false; // flag de cancelamento de coleta pelo bo
 int menu = 0;
 bool conectar = true;
 
-float calibrador = 60.0f; // altura do sensor em relacao ao fundo (cm)
+float calibrador = 78.01688f; // altura do sensor em relacao ao fundo (cm) para obter 550L com sensor a 20cm da tampa
 
 bool envia1 = false;
 bool envia2 = false;
@@ -619,8 +619,11 @@ float volumeLeite(float distancia)
     // Comprimento do recipiente (em cm)
     const float comprimento = 120.0;
     // Altura do sensor em relação ao fundo (em cm)
+    // Para que o tanque cheio de 550 L (550.000 cm³) corresponda a uma distância medida de 20.0 cm 
+    // (sensor a 20cm da tampa/superfície do leite), a altura total do sensor (calibrador) deve ser:
+    // H_leite + 20.0 = (550.000 / (79.0 * 120.0)) + 20.0 = 58.0168776 + 20.0 = 78.0168776 cm.
     const float altura_sensor = calibrador;
-    // Margem de erro máxima (em cm)
+    // Margem de erro máxima / altura do suporte do sensor acima da tampa (em cm)
     const float margem_minima = 20.0;
     // Altura máxima útil do leite (em cm)
     const float altura_maxima_util = altura_sensor - margem_minima;
